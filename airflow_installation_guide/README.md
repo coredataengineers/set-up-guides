@@ -1,5 +1,5 @@
 # Airflow Installation Guide
-This repository contains guides on different approaches of installing Apache Airflow.
+This directory contains guides on different approaches of installing Apache Airflow.
 
 [Install Airflow Using Docker](installation_using_docker.md)
 

@@ -27,7 +27,7 @@ Ensure the following are installed and running before proceeding.
 
 | Requirement | Notes |
 |---|---|
-| Docker Desktop | v4.x or later. Ensure the Docker engine is running before any step. |
+| Docker Desktop | v4.x or later. Ensure the Docker engine is running before any step. to install docker, click on this link to see guide:  |
 | Docker Compose | Bundled with Docker Desktop. Verify with: `docker compose version` |
 | Git | Needed for cloning the repository. |
 | 4 GB free RAM | The worker is allocated 2 GB; allow headroom for master and Jupyter. |

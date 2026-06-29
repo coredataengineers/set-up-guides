@@ -70,7 +70,7 @@ cd apache_spark-course
 ##### open your vs code terminal and inside the spark-course directory, run command below
 
 ```bash
-git clone https://github.com/cappymayor/spark-dev-environment
+git clone https://github.com/coredataengineers/local-spark-cluster.git
 
 ```
 ### Step 3 — Confirm the result of the clone 

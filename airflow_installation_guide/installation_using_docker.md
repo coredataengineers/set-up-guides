@@ -66,14 +66,29 @@ Go at the top bar of Visual Studio Code -> Terminal -> New Terminal
 
 ![terminal](images/terminal.png)
 
-## Step 7: Run database migrations
-In your new terminal at the bottom of Visual Studio Code, run the following command to run database migrations and create the first user account
+
+## Step 7: Generate a FERNET_KEY
+In your new terminal at the bottom of Visual Studio Code, run the following command to generate a fernet key
+
+```
+python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())
+```
+The key is printed out in your terminal after it is generated. Copy it and paste it in your .env file under AIRFLOW_UID
+
+Example:
+
+```
+FERNET_KEY=your_generated_key
+```
+
+## Step 8: Run database migrations
+Next, run the following command in your terminal to run database migrations and create the first user account
 
 ```
 docker compose up airflow-init
 ```
 
-## Step 8: Start all services
+## Step 9: Start all services
 Run this command to start all services
 ```
 docker-compose up -d
@@ -85,12 +100,12 @@ You will see many lines scrolled, wait until it's done. Docker is downloading Ai
 
 ![services_started](images/services_started.png)
 
-## Step 9: Check containers status
+## Step 10: Check containers status
 Open a new terminal and do ```docker ps``` All your containers status should be healthy as shown below
 
 ![docker_ps](images/docker_ps.png)
 
-## Step 10: Access web interface
+## Step 11: Access web interface
 Open your web browser and go to localhost:8080, you should see the login page as shown below
 
 ![login](images/login.png)

@@ -85,13 +85,13 @@ pip install "apache-airflow==<AIRFLOW_VERSION>" --constraint "https://raw.github
 ```
 
 where:
-- `AIRFLOW_VERSION` - Airflow version (e.g. 3.0.4).
+- `AIRFLOW_VERSION` - Airflow version (e.g. 3.3.2).
 - `PYTHON_VERSION` - Python version e.g. 3.9, 3.10, 3.11
 
-For example, to install Airflow version 3.0.4 in a Python version 3.11 environment, the command will look like this:
+For example, to install Airflow version 3.3.2 in a Python version 3.11 environment, the command will look like this:
 
 ```
-pip install "apache-airflow==3.0.4" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.0.4/constraints-3.11.txt"
+pip install "apache-airflow==3.3.2" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.3.2/constraints-3.10.txt"
 ```
 
 For latest Airflow version, check the documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html).
@@ -126,7 +126,32 @@ deactivate
 source <virtualenvname>/bin/activate
 ```
 
-## Step 7: Select your Python interpreter
+
+## Step 7: Enable Flask AppBuilder (FAB) Auth Manager
+Go to your terminal, install the provider package using the command:
+
+```
+pip install apache-airflow-providers-fab
+```
+
+Next, go to your airflow.cfg file to enable it
+
+![airflow_cfg_file](images/airflow_cfg_file.png)
+
+Under core section, 
+
+![core section](images/core__section.png)
+
+scroll down to where you will find auth manager and edit its value with this
+
+```
+auth_manager = airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+```
+
+![FAB_auth](images/enable_fab_auth.png)
+
+
+## Step 8: Select your Python interpreter
 Press CTRL/CMD + SHIFT + P in VSCode. It will open up the command palette. Type Select Interpreter from the command palette
 
 ![interpreter](images/interpreter.png)
@@ -136,13 +161,13 @@ Select the python interpreter which is inside the virtual environment. In this e
 
 ![select_interpreter](images/select_interpreter.png)
 
-## Step 8: Initialize the database
+## Step 9: Initialize the database
 
 ```
 airflow db migrate
 ```
 
-## Step 9: Create a user
+## Step 10: Create a user
 
 ```
 airflow users create --role Admin --username admin --email youremail@gmail.com --firstname admin --lastname admin --password admin
@@ -150,7 +175,7 @@ airflow users create --role Admin --username admin --email youremail@gmail.com -
 
 You can change the youremail@gmail.com in the command to your actual email and you can also change other arguments to whatever you prefer.
 
-## Step 10: Confirm the created user
+## Step 11: Confirm the created user
 
 ```
 airflow users list
@@ -158,13 +183,13 @@ airflow users list
 
 ![airflow_users](images/airflow_users.png)
 
-## Step 11: Launch the Webserver
+## Step 12: Launch the Webserver
 
 ```
-airflow webserver
+airflow api-server
 ```
 
-## Step 12: Launch the Scheduler
+## Step 13: Launch the Scheduler
 
 Open a new terminal and check if the environment is activated; if not, activate it by running ```source <venvname>/bin/activate ``` and then run the following command:
 
@@ -172,7 +197,7 @@ Open a new terminal and check if the environment is activated; if not, activate 
 airflow scheduler
 ```
 
-## Step 13: Access airflow from the web browser
+## Step 14: Access airflow from the web browser
 
 Open web browser and enter http://localhost:8080/. The following window will be displayed which confirms successful local airflow installation
 
@@ -190,7 +215,7 @@ Password: admin
 
 **Congratulations! You have successfully installed Airflow 🎉**
 
-## Step 14: Setup dags folder
+## Step 15: Setup dags folder
 Create a dags folder as shown below. Also verify the dags folder path inside airflow.cfg is correct (By default “[AIRFLOW_HOME]/dags”)
 
 ```
@@ -203,7 +228,7 @@ Verify the dags folder path is correctly set in airflow.cfg file
 
 ![dags_cfg](images/dags_cfg.png)
 
-## Step 15: Enable test connection if needed
+## Step 16: Enable test connection if needed
 
 To be able to test connections from the airflow UI, enable test_connection in **airflow.cfg file** as shown below. By default, it is disabled. Edit airflow.cfg file and change the test_connection variable from Disabled to Enabled then save. Restart the webserver and scheduler after performing this change for it to take effect.
 
